@@ -1,17 +1,16 @@
 import { Routes, Route } from 'react-router-dom'
 import { Landing, Workouts } from './pages'
+import Layout from './components/Layout'
 import './App.css'
 
 function App() {
   return (
-    <div className="app">      
-      <main className="main-content justify-center">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/workouts" element={<Workouts />} />
-        </Routes>
-      </main>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/workouts" element={<Workouts />} />
+      </Routes>
+    </Layout>
   )
 }
 
