@@ -10,8 +10,9 @@ import { Label } from "../components/ui/label"
 import { Checkbox } from "../components/ui/checkbox"
 import { Input } from "../components/ui/input"
 import { Textarea } from "../components/ui/textarea"
+import SurveySummary from '../components/SurveySummary'
 
-interface SurveyData {
+export interface SurveyData {
   fitnessLevel: string
   currentFitness: number[]
   biologicalSex: string
@@ -148,7 +149,7 @@ const helpfulResources = [
   },
   {
     title: "Hal Higdon Training Plans",
-    description: "Comprehensive marathon and half-marathon training plans",
+    description: "Comprehensive marathon, half-marathon and Triathlon training plans",
     link: "https://www.halhigdon.com"
   },
   {
@@ -160,6 +161,11 @@ const helpfulResources = [
     title: "Strava Training",
     description: "Community-driven training plans and tracking",
     link: "https://www.strava.com"
+    },
+  {
+    title: "REI's Backpacking Training Plan",
+    description: "A simple guide with exercises and demos to prepare for any backpacking trip",
+    link: "https://www.rei.com/learn/expert-advice/conditioning-backpacking.html"
   }
 ]
 
@@ -191,7 +197,7 @@ function FitnessSurvey() {
     additionalConsiderations: "",
   })
 
-  const totalSteps = 10
+  const totalSteps = 12
   const progress = ((currentStep + 1) / totalSteps) * 100
 
   const handleNext = () => {
@@ -273,16 +279,16 @@ function FitnessSurvey() {
   }
 
   // Show feature unavailable message if user answered yes to either question
-  // Show feature unavailable message if user answered yes to either question
   if (showFeatureUnavailable) {
     return (
-      <div className="min-h-screen bg-base-100 py-8 px-4">
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="relative p-4 w-full max-w-2xl max-h-full">
-            <div className="relative bg-white rounded-lg shadow-lg dark:bg-gray-700">
+      <div className="min-h-screen bg-base-100 py-8 px-4 overscroll-auto">
+        {/* Fixed overlay with flex centering that allows scrolling */}
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="relative w-full max-w-2xl my-8">
+            <div className="relative bg-white rounded-lg shadow-lg dark:bg-gray-700 max-h-[90vh] overflow-y-auto">
               <button 
                 type="button" 
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white z-10"
                 onClick={() => setShowFeatureUnavailable(false)}
               >
                 <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -299,8 +305,10 @@ function FitnessSurvey() {
                 <h3 className="mb-5 text-2xl font-semibold text-amber-600">Feature Currently Unavailable</h3>
                 
                 <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p className="text-amber-800">
+                  <p className="text-amber-800 text-justify">
                     Sorry about that! We haven't fully built out features that would support existing training plans or specific event training at this time.
+                    <span className="block mt-2"></span>
+                    We wouldn't want to derail your progress with a subpar experience. We're working hard to add more features and improve the experience.
                   </p>
                 </div>
                 
@@ -326,13 +334,13 @@ function FitnessSurvey() {
                 
                 <div className="text-center">
                   <p className="text-gray-600 mb-4">
-                    If you'd like to continue with our general fitness planning, you can restart the survey and select "No" for the training questions.
+                    If you'd like to continue with our general fitness planning, you can go back to the survey and select "No" for the training questions.
                   </p>
                   <button 
                     onClick={handleRestartSurvey} 
                     className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-3"
                   >
-                    Restart Survey
+                    Return to Survey
                   </button>
                   <button 
                     onClick={() => window.location.reload()} 
@@ -351,6 +359,7 @@ function FitnessSurvey() {
 
 
   const renderStep = () => {
+    console.log(surveyData)
     switch (currentStep) {
       case 0:
         return (
@@ -451,77 +460,85 @@ function FitnessSurvey() {
           </Card>
         )
 
-      case 3:
+        case 3:
         return (
-          <Card className="w-full max-w-2xl mx-auto">
+            <Card className="w-full max-w-2xl mx-auto">
             <CardHeader>
-              <CardTitle className="text-2xl">Optional Information</CardTitle>
-              <CardDescription>
+                <CardTitle className="text-2xl">Optional Information</CardTitle>
+                <CardDescription>
                 The next three questions are completely optional. If you do not want to disclose, you do not have to!
-              </CardDescription>
+                </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div>
+                <div>
                 <Label className="text-base font-semibold">What is your biological sex? (optional)</Label>
                 <Select
-                  value={surveyData.biologicalSex}
-                  onValueChange={(value: string) => setSurveyData((prev) => ({ ...prev, biologicalSex: value }))}
+                    value={surveyData.biologicalSex}
+                    onValueChange={(value: string) => setSurveyData((prev) => ({ ...prev, biologicalSex: value }))}
                 >
-                  <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2">
                     <SelectValue placeholder="Select an option" />
-                  </SelectTrigger>
-                  <SelectContent>
+                    </SelectTrigger>
+                    <SelectContent>
+                    <SelectItem value="none">Prefer not to say</SelectItem>
                     <SelectItem value="female">Female</SelectItem>
                     <SelectItem value="male">Male</SelectItem>
                     <SelectItem value="intersex">Intersex</SelectItem>
-                  </SelectContent>
+                    </SelectContent>
                 </Select>
-              </div>
+                </div>
 
-              <div>
+                <div>
                 <Label className="text-base font-semibold">What is your height? (optional)</Label>
                 <Select
-                  value={surveyData.height}
-                  onValueChange={(value: string) => setSurveyData((prev) => ({ ...prev, height: value }))}
+                    value={surveyData.height}
+                    onValueChange={(value: string) => setSurveyData((prev) => ({ ...prev, height: value }))}
                 >
-                  <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2">
                     <SelectValue placeholder="Select height" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Array.from({ length: 121 }, (_, i) => {
-                      const inches = i + 48 // 4'0" to 10'0"
-                      const feet = Math.floor(inches / 12)
-                      const remainingInches = inches % 12
-                      return (
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                    <SelectItem value="none">Prefer not to say</SelectItem>
+                    {Array.from({ length: 73 }, (_, i) => {
+                        const inches = i + 48 // 4'0" to 8'0" (more realistic range)
+                        const feet = Math.floor(inches / 12)
+                        const remainingInches = inches % 12
+                        const cmEquivalent = Math.round(inches * 2.54)
+                        return (
                         <SelectItem key={inches} value={`${feet}'${remainingInches}"`}>
-                          {feet}'{remainingInches}"
+                            {feet}'{remainingInches}" ({cmEquivalent} cm)
                         </SelectItem>
-                      )
+                        )
                     })}
-                  </SelectContent>
+                    </SelectContent>
                 </Select>
-              </div>
+                </div>
 
-              <div>
+                <div>
                 <Label className="text-base font-semibold">What is your weight? (optional)</Label>
                 <Select
-                  value={surveyData.weight}
-                  onValueChange={(value: string) => setSurveyData((prev) => ({ ...prev, weight: value }))}
+                    value={surveyData.weight}
+                    onValueChange={(value: string) => setSurveyData((prev) => ({ ...prev, weight: value }))}
                 >
-                  <SelectTrigger className="mt-2">
+                    <SelectTrigger className="mt-2">
                     <SelectValue placeholder="Select weight" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Array.from({ length: 501 }, (_, i) => (
-                      <SelectItem key={i} value={`${i} lbs`}>
-                        {i} lbs
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60">
+                    <SelectItem value="none">Prefer not to say</SelectItem>
+                    {Array.from({ length: 350 }, (_, i) => {
+                        const lbs = i + 50 // 50-400 lbs (more realistic range)
+                        const kg = Math.round(lbs / 2.205)
+                        return (
+                        <SelectItem key={lbs} value={`${lbs} lbs`}>
+                            {lbs} lbs ({kg} kg)
+                        </SelectItem>
+                        )
+                    })}
+                    </SelectContent>
                 </Select>
-              </div>
+                </div>
             </CardContent>
-          </Card>
+            </Card>
         )
 
       case 4:
@@ -579,11 +596,11 @@ function FitnessSurvey() {
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="yes" id="plan-yes" />
-                    <Label htmlFor="plan-yes">YES</Label>
+                    <Label htmlFor="plan-yes">Yes</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="no" id="plan-no" />
-                    <Label htmlFor="plan-no">NO</Label>
+                    <Label htmlFor="plan-no">No</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -600,11 +617,11 @@ function FitnessSurvey() {
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="yes" id="training-yes" />
-                    <Label htmlFor="training-yes">YES</Label>
+                    <Label htmlFor="training-yes">Yes</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="no" id="training-no" />
-                    <Label htmlFor="training-no">NO</Label>
+                    <Label htmlFor="training-no">No</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -678,7 +695,7 @@ function FitnessSurvey() {
               <div className="px-4">
                 <Slider
                   value={surveyData.varietyImportance}
-                  onValueChange={(value: number) => setSurveyData((prev) => ({ ...prev, varietyImportance: value }))}
+                  onValueChange={(value: number[]) => setSurveyData((prev) => ({ ...prev, varietyImportance: value }))}
                   max={100}
                   step={1}
                   className="w-full"
@@ -795,7 +812,7 @@ function FitnessSurvey() {
                 <div className="px-4">
                   <Slider
                     value={surveyData.workoutFrequency}
-                    onValueChange={(value: number) => setSurveyData((prev) => ({ ...prev, workoutFrequency: value }))}
+                    onValueChange={(value: number[]) => setSurveyData((prev) => ({ ...prev, workoutFrequency: value }))}
                     min={1}
                     max={7}
                     step={1}
@@ -873,11 +890,11 @@ function FitnessSurvey() {
                 >
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="yes" id="weather-yes" />
-                    <Label htmlFor="weather-yes">YES</Label>
+                    <Label htmlFor="weather-yes">Yes</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="no" id="weather-no" />
-                    <Label htmlFor="weather-no">NO</Label>
+                    <Label htmlFor="weather-no">No</Label>
                   </div>
                 </RadioGroup>
                 {surveyData.considerWeather === "yes" && (
@@ -958,6 +975,9 @@ function FitnessSurvey() {
             </CardContent>
           </Card>
         )
+      
+      case 11:
+        return (<SurveySummary surveyData={surveyData}/>)
 
       default:
         return null
@@ -967,6 +987,7 @@ function FitnessSurvey() {
   return (
     <div className="min-h-screen bg-background py-8 px-4">
       <div className="max-w-4xl mx-auto">
+        {/* Progress Bar */}
         <div className="mb-8">
           <Progress value={progress} className="w-full" />
           <p className="text-center text-sm text-muted-foreground mt-2">
@@ -976,14 +997,18 @@ function FitnessSurvey() {
 
         {renderStep()}
 
-        <div className="flex justify-between mt-8 max-w-2xl mx-auto">
-          <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 0}>
-            Previous
-          </Button>
-          <Button onClick={handleNext} disabled={currentStep === totalSteps - 1}>
-            {currentStep === totalSteps - 1 ? "Complete Survey" : "Next"}
-          </Button>
-        </div>
+        {/* Navigation Buttons */}
+        {currentStep < totalSteps-1 ? (
+          <div className="flex justify-between mt-8 max-w-2xl mx-auto">
+            <Button variant="outline" onClick={handlePrevious} disabled={currentStep === 0}>
+              Previous
+            </Button>
+            <Button onClick={handleNext}>
+              {currentStep === (totalSteps - 2) ? "Complete Survey" : "Next"}
+            </Button>
+          </div>
+        ): <></>}
+
       </div>
     </div>
   )
