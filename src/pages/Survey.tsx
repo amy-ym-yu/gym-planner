@@ -8,30 +8,32 @@ import { Slider } from '../components/ui/slider'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import { Label } from "../components/ui/label"
 import { Checkbox } from "../components/ui/checkbox"
-import { Input } from "../components/ui/input"
+import LocationInput from '../components/survey/LocationInput'
 import { Textarea } from "../components/ui/textarea"
-import SurveySummary from '../components/SurveySummary'
+import SurveySummary from '../components/survey/SurveySummary'
 
 export interface SurveyData {
   fitnessLevel: string
   currentFitness: number[]
-  biologicalSex: string
-  height: string
-  weight: string
+  biologicalSex?: string
+  height?: string
+  weight?: string
   activities: string[]
-  hasExistingPlan: string
-  trainingForSpecific: string
+  hasExistingPlan?: string
+  trainingForSpecific?: string
   goals: string[]
   planPreference: string
   varietyImportance: number[]
   interestedActivities: string[]
-  selectedActivitiesEquipment: { [key: string]: string }
+  selectedActivitiesEquipment?: { [key: string]: string }
   avoidActivities: string[]
   workoutFrequency: number[]
   workoutDays: string[]
   workoutDuration: string
   considerWeather: string
-  location: string
+  location?: string
+  longitude?: number
+  latitude?: number
   workoutPartner: string
   workoutTime: string
   additionalConsiderations: string
@@ -55,7 +57,7 @@ const fitnessLevels = [
   {
     id: "back-in-action",
     title: "Back in Action",
-    subtitle: "(exercising 5-7x / week)",
+    subtitle: "(used to workout, but took a break)",
     description:
       "You've done this before, and you're ready to get back in there. We'll help you find your rhythm again, and maybe add a couple more tricks up your sleeve!",
   },
@@ -170,7 +172,7 @@ const helpfulResources = [
 ]
 
 function FitnessSurvey() {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(10)
   const [showFeatureUnavailable, setShowFeatureUnavailable] = useState(false)
   const [surveyData, setSurveyData] = useState<SurveyData>({
     fitnessLevel: "",
@@ -277,6 +279,7 @@ function FitnessSurvey() {
       trainingForSpecific: ""
     }))
   }
+  
 
   // Show feature unavailable message if user answered yes to either question
   if (showFeatureUnavailable) {
@@ -404,7 +407,7 @@ function FitnessSurvey() {
                     key={level.id}
                     className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors"
                   >
-                    <RadioGroupItem value={level.id} id={level.id} className="mt-1" />
+                    <RadioGroupItem value={level.subtitle} id={level.id} className="mt-1" />
                     <div className="flex-1">
                       <Label htmlFor={level.id} className="text-base font-semibold cursor-pointer">
                         {level.title} <span className="text-muted-foreground font-normal">{level.subtitle}</span>
@@ -897,20 +900,10 @@ function FitnessSurvey() {
                     <Label htmlFor="weather-no">No</Label>
                   </div>
                 </RadioGroup>
-                {surveyData.considerWeather === "yes" && (
-                  <div>
-                    <Label htmlFor="location" className="text-sm font-medium">
-                      Location
-                    </Label>
-                    <Input
-                      id="location"
-                      placeholder="Enter your city"
-                      value={surveyData.location}
-                      onChange={(e) => setSurveyData((prev) => ({ ...prev, location: e.target.value }))}
-                      className="mt-2"
-                    />
-                  </div>
-                )}
+                <LocationInput
+                  surveyData={surveyData}
+                  setSurveyData={setSurveyData}
+                />
               </div>
 
               <div>
