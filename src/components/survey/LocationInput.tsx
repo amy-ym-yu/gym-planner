@@ -24,7 +24,7 @@ const LocationInput: React.FC<LocationInputProps> = ({ surveyData, setSurveyData
 
   useEffect(() => {
     const fetchData = async () => {
-      if (surveyData.location.length < 2) {
+      if (surveyData.location && surveyData.location.length < 2) {
         setSuggestions([])
         return
       }

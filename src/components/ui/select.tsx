@@ -1,43 +1,21 @@
-import React from 'react'
-import * as SelectPrimitive from "@radix-ui/react-select"
-import { ChevronDown, Check } from "lucide-react"
+import React from "react";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { ChevronDown, Check } from "lucide-react";
 
-// Type definitions - these extend the original Radix props (including children)
-interface SelectTriggerProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
-  className?: string
-  children?: React.ReactNode
+// --- Root ---
+type SelectProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>;
+
+export const Select = (props: SelectProps) => {
+  return <SelectPrimitive.Root {...props} />;
+};
+Select.displayName = "Select";
+
+// --- Trigger ---
+interface SelectTriggerProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> {
+  className?: string;
 }
 
-interface SelectContentProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> {
-  className?: string  
-  children?: React.ReactNode
-}
-
-interface SelectItemProps {
-  className?: string
-  children?: React.ReactNode
-  value: string
-  disabled?: boolean
-  onSelect?: () => void
-}
-
-// Type definition for Select root
-interface SelectProps extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> {
-  value?: string
-  onValueChange?: (value: string) => void
-  children?: React.ReactNode
-}
-
-// Root Select component
-const Select = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Root>,
-  SelectProps
->(({ ...props }, ref) => (
-  <SelectPrimitive.Root ref={ref} {...props} />
-))
-Select.displayName = "Select"
-
-// Trigger (the button you click to open dropdown)
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   SelectTriggerProps
@@ -58,10 +36,15 @@ const SelectTrigger = React.forwardRef<
       <ChevronDown className="h-4 w-4 opacity-70" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
-))
-SelectTrigger.displayName = "SelectTrigger"
+));
+SelectTrigger.displayName = "SelectTrigger";
 
-// Content (the dropdown menu)
+// --- Content ---
+interface SelectContentProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> {
+  className?: string;
+}
+
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   SelectContentProps
@@ -81,10 +64,15 @@ const SelectContent = React.forwardRef<
       </SelectPrimitive.Viewport>
     </SelectPrimitive.Content>
   </SelectPrimitive.Portal>
-))
-SelectContent.displayName = "SelectContent"
+));
+SelectContent.displayName = "SelectContent";
 
-// Individual option items
+// --- Item ---
+interface SelectItemProps
+  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Item> {
+  className?: string;
+}
+
 const SelectItem = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Item>,
   SelectItemProps
@@ -107,16 +95,10 @@ const SelectItem = React.forwardRef<
     </span>
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
   </SelectPrimitive.Item>
-))
-SelectItem.displayName = "SelectItem"
+));
+SelectItem.displayName = "SelectItem";
 
-// Value placeholder
-const SelectValue = SelectPrimitive.Value
+// --- Value ---
+const SelectValue = SelectPrimitive.Value;
 
-export {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
-}
+export { SelectTrigger, SelectContent, SelectItem, SelectValue };

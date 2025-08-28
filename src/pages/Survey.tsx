@@ -31,7 +31,7 @@ export interface SurveyData {
   workoutDays: string[]
   workoutDuration: string
   considerWeather: string
-  location?: string
+  location: string
   longitude?: number
   latitude?: number
   workoutPartner: string
