@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardDescription, CardTitle } from '../components/ui/card'
 import { Progress } from '../components/ui/progress'
 import { RadioGroup, RadioGroupItem } from '../components/ui/radio-group'
@@ -172,7 +172,7 @@ const helpfulResources = [
 ]
 
 function FitnessSurvey() {
-  const [currentStep, setCurrentStep] = useState(10)
+  const [currentStep, setCurrentStep] = useState(0)
   const [showFeatureUnavailable, setShowFeatureUnavailable] = useState(false)
   const [surveyData, setSurveyData] = useState<SurveyData>({
     fitnessLevel: "",
@@ -280,6 +280,9 @@ function FitnessSurvey() {
     }))
   }
   
+  useEffect(() => {
+    console.log("Survey Data for Step", currentStep, ":", surveyData);
+  }, [currentStep]);
 
   // Show feature unavailable message if user answered yes to either question
   if (showFeatureUnavailable) {
@@ -360,9 +363,7 @@ function FitnessSurvey() {
     )
   }
 
-
   const renderStep = () => {
-    console.log(surveyData)
     switch (currentStep) {
       case 0:
         return (

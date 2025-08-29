@@ -171,7 +171,7 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
     setPromptData(data);
     console.log('Prepared Prompt Data:', data); // Debugging line
 
-    const raw_response = await getResponseFromLLM('mistral', JSON.stringify(data));
+    const raw_response = await getResponseFromLLM(JSON.stringify(data));
     console.log('LLM Response:', raw_response); // Debugging line
     
   };

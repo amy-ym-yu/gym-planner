@@ -50,7 +50,7 @@ Duration: [duration in minutes]
 * Exercise Name
 	- [A reps x B sets] or [A mins x B rounds] (where A and B are integers)
 		* Break: [duration in seconds] after each [set/round]
-
+Notes: [any relevant or help information the user should know]
 ```
 
 Activities will be structured as so.
@@ -59,6 +59,7 @@ Activities will be structured as so.
 Duration: [duration in minutes]
 Equipment:
 	* [item 1]
+Notes: [any relevant or help information the user should know]
 ```
 
 Your task is to respond in the given template (provided in markdown). 
@@ -66,24 +67,24 @@ Your response should only contain the follow information. Do not include any ext
 ```markdown
 ## Workout Plan
 # Monday
-{activity or workout}
+{activity or workout or no activity}
 
 # Tuesday 
-{activity or workout}
+{activity or workout or no activity}
 
 # Wednesday
-{activity or workout}
+{activity or workout or no activity}
 
 # Thursday
-{activity or workout} 
+{activity or workout or no activity} 
 
 # Friday
-{activity or workout} 
+{activity or workout or no activity} 
 
 # Saturday
-{activity or workout} 
+{activity or workout or no activity} 
 
 # Sunday
-{activity or workout} 
+{activity or workout or no activity} 
 ```
 [/INST]</s>

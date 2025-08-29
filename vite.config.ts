@@ -10,4 +10,9 @@ export default defineConfig({
       'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
     },
   },
+  server: {
+    proxy: {
+      "/api": "http://localhost:3000"
+    }
+  }
 })
