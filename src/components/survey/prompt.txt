@@ -49,7 +49,7 @@ Workouts will be structured as given.
 Duration: [duration in minutes]
 * Exercise Name
 	- [A reps x B sets] or [A mins x B rounds] (where A and B are integers)
-		* Break: [duration in seconds] after each [set/round]
+		> Break: [duration in seconds] after each [set/round]
 Notes: [any relevant or help information the user should know]
 ```
 

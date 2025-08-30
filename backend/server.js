@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { Mistral } from "@mistralai/mistralai";
 import OpenAI from "openai";
+import emailRoutes from "./routes/email.js";
+import geoapifyRoutes from "./routes/geoapify.js";
 
 dotenv.config();
 
@@ -76,6 +78,10 @@ app.post("/api/mistral", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+app.use("/api/email", emailRoutes);
+
+app.use("/api/geoapify/autocomplete", geoapifyRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>

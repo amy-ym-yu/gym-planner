@@ -1,0 +1,74 @@
+```markdown
+## Workout Plan
+# Monday
+# Weight Lifting - Full Body Strength
+Duration: 45 minutes
+* Squats
+	- 12 reps x 3 sets
+		> Break: 60 seconds after each set
+* Dumbbell Bench Press
+	- 12 reps x 3 sets
+		> Break: 60 seconds after each set
+* Bent-over Rows
+	- 12 reps x 3 sets
+		> Break: 60 seconds after each set
+* Plank
+	- 30 seconds x 3 sets
+		> Break: 30 seconds after each set
+Notes: Focus on controlled movements and proper form to maximize strength gains and reduce injury risk.
+
+# Tuesday
+# Running Intervals
+Duration: 30 minutes
+* Warm-up walk or light jog
+	- 5 minutes x 1 round
+* Run fast pace
+	- 1 minute x 6 rounds
+		> Break: 1.5 minutes walk or slow jog after each round
+* Cool down walk
+	- 5 minutes x 1 round
+Notes: Interval running boosts cardiovascular health and aids fat loss. Adjust pace to your comfort level.
+
+# Wednesday
+# Body Weight Circuit
+Duration: 40 minutes
+* Push-ups
+	- 10 reps x 3 sets
+		> Break: 45 seconds after each set
+* Bodyweight Squats
+	- 15 reps x 3 sets
+		> Break: 45 seconds after each set
+* Glute Bridges
+	- 15 reps x 3 sets
+		> Break: 45 seconds after each set
+* Mountain Climbers
+	- 30 seconds x 3 sets
+		> Break: 30 seconds after each set
+* Plank
+	- 30 seconds x 3 sets
+		> Break: 30 seconds after each set
+Notes: No equipment needed, can be done indoors or outdoors. Great for overall strength and endurance.
+
+# Thursday
+# Yoga for Flexibility and Recovery
+Duration: 45 minutes
+Equipment:
+	* Yoga mat
+Notes: Focus on breathing and gentle stretching to improve flexibility, reduce stress, and aid recovery.
+
+# Friday
+# Cycling (Indoor or Outdoor)
+Duration: 45 minutes
+Equipment:
+	* Bicycle or stationary bike
+Notes: Steady-state cycling improves cardiovascular health and burns calories. Adjust intensity to your fitness level.
+
+# Saturday
+No activity
+
+# Sunday
+# Hiking
+Duration: 60 minutes
+Equipment:
+	* Comfortable walking shoes
+Notes: Enjoy the outdoors while improving cardiovascular health and building lower body strength. Start with moderate trails.

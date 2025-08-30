@@ -17,34 +17,34 @@ interface Suggestion {
   }
 }
 
-const GEOAPIFY_KEY = import.meta.env.VITE_GEOAPIFY_API_KEY as string
-
 const LocationInput: React.FC<LocationInputProps> = ({ surveyData, setSurveyData }) => {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (surveyData.location && surveyData.location.length < 2) {
-        setSuggestions([])
-        return
-      }
+useEffect(() => {
+  if (!surveyData.location || surveyData.location.length < 2) {
+    setSuggestions([]);
+    return;
+  }
 
-      try {
-        const res = await fetch(
-          `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(
-            surveyData.location
-          )}&limit=5&apiKey=${GEOAPIFY_KEY}`
-        )
-        const data = await res.json()
-        setSuggestions(data.features)
-      } catch (error) {
-        console.error("Error fetching location suggestions:", error)
-      }
+  const fetchData = async () => {
+    try {
+      const res = await fetch(
+        `/api/geoapify/autocomplete?text=${encodeURIComponent(surveyData.location)}`
+      );
+
+      if (!res.ok) throw new Error(`Status ${res.status}`);
+
+      const data = await res.json();
+      setSuggestions(data.features || []);
+    } catch (error) {
+      console.error("Error fetching location suggestions:", error);
+      setSuggestions([]);
     }
+  };
 
-    const timeout = setTimeout(fetchData, 300) // debounce
-    return () => clearTimeout(timeout)
-  }, [surveyData.location])
+  const timeout = setTimeout(fetchData, 300);
+  return () => clearTimeout(timeout);
+}, [surveyData.location]);
 
   const handleSelect = (s: Suggestion) => {
     setSurveyData((prev) => ({
