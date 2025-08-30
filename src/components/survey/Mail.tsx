@@ -132,13 +132,10 @@ export const sendWorkoutPlanEmail = async (
       ).join('\n')}`
     };
 
-    // Replace this with your actual email service endpoint
-    const response = await fetch('/api/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(emailData),
+    const response = await fetch('/api/email/send-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(emailData),
     });
 
     if (!response.ok) {

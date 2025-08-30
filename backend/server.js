@@ -1,12 +1,12 @@
+import dotenv from "dotenv";
+dotenv.config({ debug: true });
+
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import { Mistral } from "@mistralai/mistralai";
 import OpenAI from "openai";
 import emailRoutes from "./routes/email.js";
 import geoapifyRoutes from "./routes/geoapify.js";
-
-dotenv.config();
 
 const app = express();
 
