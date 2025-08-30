@@ -38,8 +38,21 @@ router.post("/send-email", async (req, res) => {
   try {
     console.log("Sending email to:", to);
 
+    // Initialize transporter here to guarantee env variables exist
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    // Verify transporter before sending
+    await transporter.verify();
+    console.log("Transporter verified successfully");
+
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM,
+      from: process.env.EMAIL_USER, // match auth.user
       to,
       subject,
       html,
@@ -53,9 +66,10 @@ router.post("/send-email", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to send email",
-      error: error.message, // Include error message for debugging
+      error: error.message,
     });
   }
 });
+
 
 export default router;
