@@ -13,6 +13,10 @@ router.get("/", async (req, res) => {
   }
 
   try {
+    console.log("Fetching location suggestions for:", text);
+    console.log(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(
+      text
+    )}&limit=5&apiKey=${process.env.GEOAPIFY_KEY}`)
     const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(
       text
     )}&limit=5&apiKey=${process.env.GEOAPIFY_KEY}`;

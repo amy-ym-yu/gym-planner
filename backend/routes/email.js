@@ -4,28 +4,8 @@ import nodemailer from "nodemailer";
 const router = express.Router();
 
 console.log("Testing env vars:");
-console.log("TEST_VAR:", process.env.TEST_VAR);
 console.log("EMAIL_USER:", process.env.EMAIL_USER);
 console.log("EMAIL_PASSWORD exists:", !!process.env.EMAIL_PASSWORD);
-
-// Create transporter using Gmail and App Password
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.EMAIL_USERNAME,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-transporter.verify((err, success) => {
-  if (err) console.error("Transporter verify failed:", err);
-  else console.log("Transporter is ready");
-});
 
 router.post("/send-email", async (req, res) => {
   const { to, subject, html, text } = req.body;
