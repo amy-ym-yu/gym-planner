@@ -1,7 +1,7 @@
 import type { SurveyData } from '../../pages/Survey'
 import { useState, useEffect } from "react"
 import { getResponseFromLLM } from '../survey/llmEndpoint';
-import example_response from '../survey/example_response.txt?raw';
+// import example_response from '../survey/example_response.txt?raw';
 import Mail from './Mail';
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
@@ -97,7 +97,7 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
       delete temp.selectedActivitiesEquipment;
     }
 
-    const weatherArray: Weather[] = [];
+    // const weatherArray: Weather[] = [];
 
     if (temp.considerWeather === "yes" && temp.latitude && temp.longitude && temp.workoutDays?.length) {
       try {
@@ -164,7 +164,7 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
   };
   
   function parseWeeklyPlan(markdown: string): WeeklyPlan {
-      const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      // const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       const plan: Partial<WeeklyPlan> = {};
 
       const daySections = markdown.split(/# (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/g);
@@ -249,6 +249,14 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
       getWeeklyPlan();
     }
   }, [surveyData]);
+
+  useEffect(() => {
+    console.log('Prompt Data:', promptData);
+  }, [promptData]);
+
+    useEffect(() => {
+    console.log('Response:', response);
+  }, [response]);
 
   if (weeklyPlan === null) {
     return (

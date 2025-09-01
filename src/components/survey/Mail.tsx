@@ -83,9 +83,9 @@ export const sendWorkoutPlanEmail = async (
             <p style="margin: 0 0 15px 0; color: #6b7280;"><strong>Duration:</strong> ${dayPlan.time} minutes</p>
             <div style="margin-left: 20px;">
           `;
-          dayPlan.activities.forEach((exercise, index) => {
+          dayPlan.activities.forEach((exercise: Exercise, index: number) => {
             html += `
-              <div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #667eea;">
+              <div style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #667eea; key=${index};">
                 <h4 style="margin: 0 0 5px 0; color: #374151; font-weight: 600;">${exercise.name}</h4>
                 <p style="margin: 0; color: #6b7280; font-size: 14px;">
                   ${exercise.duration} minutes • Break: ${exercise.break}s • Intensity: ${exercise.intensity}
@@ -143,6 +143,7 @@ export const sendWorkoutPlanEmail = async (
     }
 
     const result = await response.json();
+    console.log(result);
     return { success: true, message: 'Workout plan sent successfully!' };
     
   } catch (error) {
@@ -208,8 +209,7 @@ export default function MailComponent({ isOpen, onClose, weeklyPlan }: MailCompo
               <CardTitle className="text-lg sm:text-xl text-foreground">Email Your Plan</CardTitle>
             </div>
             <Button 
-              variant="ghost" 
-              size="sm"
+              size="default"
               onClick={handleClose}
               disabled={isLoading}
               className="flex-shrink-0 hover:bg-gray-100"
