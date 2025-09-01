@@ -58,7 +58,7 @@ export const sendWorkoutPlanEmail = async (
     const formatWorkoutPlan = (plan: WeeklyPlan): string => {
       let html = `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 800px; margin: 0 auto; background: #ffffff;">
-          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 8px 8px 0 0;">
+          <div style="background: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%); color: white; padding: 40px 20px; text-align: center; border-radius: 8px 8px 0 0;">
             <h1 style="margin: 0; font-size: 28px; font-weight: bold;">Your Weekly Workout Plan</h1>
             <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 16px;">Personalized fitness routine just for you</p>
           </div>
@@ -69,7 +69,7 @@ export const sendWorkoutPlanEmail = async (
         html += `
           <div style="margin-bottom: 30px; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
             <div style="background: #f9fafb; padding: 15px; border-bottom: 1px solid #e5e7eb;">
-              <h2 style="margin: 0; font-size: 20px; color: #374151; font-weight: 600;">${day}</h2>
+              <h2 style="margin: 0; font-size: 20px; color: #db2777; font-weight: 600;">${day}</h2>
             </div>
             <div style="padding: 20px;">
         `;
@@ -79,7 +79,7 @@ export const sendWorkoutPlanEmail = async (
         } else if ('activities' in dayPlan) {
           // Workout
           html += `
-            <h3 style="margin: 0 0 15px 0; color: #111827; font-size: 18px;">${dayPlan.name}</h3>
+            <h3 style="margin: 0 0 15px 0; color: #db2777; font-size: 18px;">${dayPlan.name}</h3>
             <p style="margin: 0 0 15px 0; color: #6b7280;"><strong>Duration:</strong> ${dayPlan.time} minutes</p>
             <div style="margin-left: 20px;">
           `;
@@ -98,7 +98,7 @@ export const sendWorkoutPlanEmail = async (
         } else if ('equipment' in dayPlan) {
           // Activity
           html += `
-            <h3 style="margin: 0 0 15px 0; color: #111827; font-size: 18px;">${dayPlan.name}</h3>
+            <h3 style="margin: 0 0 15px 0; color: #db2777; font-size: 18px;">${dayPlan.name}</h3>
             <p style="margin: 0 0 10px 0; color: #6b7280;"><strong>Duration:</strong> ${dayPlan.duration} minutes</p>
             ${dayPlan.equipment.length > 0 ? `<p style="margin: 0; color: #6b7280;"><strong>Equipment:</strong> ${dayPlan.equipment.join(', ')}</p>` : ''}
           `;
@@ -120,6 +120,16 @@ export const sendWorkoutPlanEmail = async (
         </div>
       `;
 
+            html += `
+          </div>
+          <div style="background: #f9fafb; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
+            <p style="margin: 0; color: #6b7280; font-size: 14px;">
+              Keep up the great work! Remember to listen to your body and adjust as needed.
+            </p>
+          </div>
+        </div>
+      `;
+
       return html;
     };
 
@@ -132,7 +142,9 @@ export const sendWorkoutPlanEmail = async (
       ).join('\n')}`
     };
 
-    const response = await fetch('/api/email/send-email', {
+    const url = import.meta.env.VITE_BACKEND_URL + '/api/email/send-email';
+    console.log('Fetching URL:', url);
+    const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(emailData),

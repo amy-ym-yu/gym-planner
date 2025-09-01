@@ -2,14 +2,16 @@ import system_prompt from "./prompt.txt?raw"
 
 export const getResponseFromLLM = async (prompt: string) => {
     const sendRequest = async (url: string, body: any) => {
-        const res = await fetch(url, {
+        const fullUrl = import.meta.env.VITE_BACKEND_URL + url;
+        console.log("Sending request to:", fullUrl);
+        const res = await fetch(fullUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body),
         });
         const data = await res.json();
-        console.log(`${url} response status:`, res.status);
-        console.log(`${url} response data:`, data);
+        console.log(`${fullUrl} response status:`, res.status);
+        console.log(`${fullUrl} response data:`, data);
         return data;
     };
 

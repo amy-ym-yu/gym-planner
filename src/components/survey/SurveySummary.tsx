@@ -2,6 +2,7 @@ import type { SurveyData } from '../../pages/Survey'
 import { useState, useEffect } from "react"
 import { getResponseFromLLM } from '../survey/llmEndpoint';
 // import example_response from '../survey/example_response.txt?raw';
+// import example_response from '../survey/example_response2.txt?raw';
 import Mail from './Mail';
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
@@ -38,7 +39,11 @@ interface PromptData {
 interface Exercise {
     name: string;
     duration: number;
+    durationType: string;
     break: number;
+    breakType: string;
+    repeats: number;
+    repeatsType: string;
     intensity: string;
     description: string;
     muscleGroups: string[];
@@ -164,7 +169,7 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
   };
   
   function parseWeeklyPlan(markdown: string): WeeklyPlan {
-      // const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      const days: (keyof WeeklyPlan)[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       const plan: Partial<WeeklyPlan> = {};
 
       const daySections = markdown.split(/# (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/g);
@@ -195,18 +200,30 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
 
                   const name = lines[0];
                   
-                  // Look for reps/sets pattern in the exercise block
-                  const setRepMatch = block.match(/(\d+)\s*(reps|steps|seconds|minutes).*x\s*(\d+)/i);
-                  const duration = setRepMatch ? parseInt(setRepMatch[1]) : 0;
-
+                  // Look for reps/min pattern in the exercise block
+                const repMatch = block.match(/\[?(\d+)\s*(reps?|seconds?|minutes?|mins?|secs?).*?x\s*(\d+)/i);
+                block.match(/\-?\[?(\d+)\s*(\[?reps?|seconds?|minutes?|mins?).*?x\s*(\d+)/i);
+                  const duration = repMatch ? parseInt(repMatch[1]) : 0;
+                  const unit = block.includes("rep") ? "reps" : (block.includes("second") ? "seconds" : "minutes");
+                  
+                // look for sets/rounds pattern in the exercise block
+                  const roundsMatch = block.match(/x*\s*(\d+)*\s*(sets?|rounds?)/i);
+                  const repeats = roundsMatch ? parseInt(roundsMatch[1]) : 0;
+                  const repeatsType = block.includes("set") ? "sets" : "rounds";
+              
                   // Look for break information within this exercise block
-                  const breakMatch = block.match(/>\s*Break:\s*(\d+)\s*seconds/i);
-                  const breakTime = breakMatch ? parseInt(breakMatch[1]) : 0;
+                  const breakMatch = block.match(/>\s*Break:\s*(\d+(?:\.\d+)?)\s*(seconds?|minutes?)/i);
+                  const breakUnit = block.includes("second") ? "seconds" : "minutes";
+                  const breakTime = breakMatch ? parseFloat(breakMatch[1]) : 0;
 
                   return {
                       name,
                       duration,
+                      durationType: unit,
                       break: breakTime,
+                      breakType: breakUnit,
+                      repeats,
+                      repeatsType,
                       intensity: "medium",
                       description: "",
                       muscleGroups: [],
@@ -222,8 +239,21 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
               } as Workout;
           }
       }
-      console.log('Parsed Weekly Plan:', plan);
-      return plan as WeeklyPlan;
+    
+      days.forEach(day => {
+          if (!plan[day]) {
+              plan[day] = "No Activity";
+          }
+      })
+    
+      // Create ordered result using the days array
+      const orderedPlan: Partial<WeeklyPlan> = {};
+      days.forEach(day => {
+          orderedPlan[day] = plan[day];
+      });
+    
+      console.log('Parsed Weekly Plan:', orderedPlan);
+      return orderedPlan as WeeklyPlan;
   }
 
   const getWeeklyPlan = async () => {
@@ -239,6 +269,7 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
     // setResponse(example_response);
     // console.log('LLM Response:', example_response);
     // const parsed_response = parseWeeklyPlan(example_response);
+
     setWeeklyPlan(parsed_response);
   };
 
@@ -348,9 +379,9 @@ export default function SurveySummary({ surveyData }: SurveySummaryProps) {
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
                                   <span className="flex items-center gap-1">
                                     <Activity className="h-3 w-3 flex-shrink-0" />
-                                    {exercise.duration} minutes
+                                    {exercise.duration} {exercise.durationType} x {exercise.repeats} {exercise.repeatsType}
                                   </span>
-                                  <span>Break: {exercise.break}s after</span>
+                                  <span>Break: {exercise.break} {exercise.breakType} after</span>
                                   <span>Intensity: {exercise.intensity}</span>
                                 </div>
                                 {exercise.description && (

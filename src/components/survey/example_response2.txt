@@ -1,0 +1,189 @@
+```markdown
+## Workout Plan
+# Monday
+# Kettlebell & Dumbbell Circuit
+Duration: 75 minutes
+* Warm-up: Dynamic stretches and light cardio
+	- [10 mins x 1 round]
+* Kettlebell Swings
+	- [15 reps x 4 sets]
+		> Break: 45 seconds after each set
+* Dumbbell Goblet Squats
+	- [12 reps x 4 sets]
+		> Break: 45 seconds after each set
+* Dumbbell Rows
+	- [12 reps x 4 sets]
+		> Break: 45 seconds after each set
+* Kettlebell Deadlifts
+	- [15 reps x 3 sets]
+		> Break: 45 seconds after each set
+* Core: Plank Hold
+	- [45 seconds x 3 sets]
+		> Break: 30 seconds after each set
+* Cool down: Yoga stretches focusing on flexibility and relaxation
+	- [10 mins x 1 round]
+Notes: Focus on controlled movements and proper form to build functional strength and avoid injury.
+
+# Wednesday
+# Trail Running & Bodyweight Strength
+Duration: 75 minutes
+* Trail Running (outdoor)
+	- [30 mins x 1 round]
+* Bodyweight Circuit (repeat 3 rounds)
+	- Push-ups: [12 reps]
+	- Walking Lunges: [15 reps each leg]
+	- Glute Bridges: [15 reps]
+	- Bodyweight Squats: [20 reps]
+		> Break: 60 seconds after each round
+* Core: Bicycle Crunches
+	- [20 reps x 3 sets]
+		> Break: 30 seconds after each set
+* Cool down: Gentle yoga stretches
+	- [10 mins x 1 round]
+Notes: Trail running will boost cardiovascular health and energy; bodyweight exercises enhance functional strength.
+
+# Friday
+# Weight Lifting & Functional Strength
+Duration: 90 minutes
+* Warm-up: Light cardio and mobility drills
+	- [10 mins x 1 round]
+* Deadlifts
+	- [8 reps x 4 sets]
+		> Break: 90 seconds after each set
+* Dumbbell Overhead Press
+	- [10 reps x 4 sets]
+		> Break: 60 seconds after each set
+* Weighted Step-ups (use dumbbells)
+	- [12 reps each leg x 3 sets]
+		> Break: 60 seconds after each set
+* Resistance Band Rows
+	- [15 reps x 3 sets]
+		> Break: 45 seconds after each set
+* Core: Russian Twists (with or without weight)
+	- [20 reps x 3 sets]
+		> Break: 30 seconds after each set
+* Cool down: Yoga stretches focusing on hips and shoulders
+	- [10 mins x 1 round]
+Notes: Emphasize proper lifting technique to build strength for daily activities.
+
+# Saturday
+# Outdoor Hiking & Mobility Yoga
+Duration: 90 minutes
+* Hiking (outdoor)
+	- [60 mins x 1 round]
+* Post-hike Yoga for Mobility and Recovery
+	- [30 mins x 1 round]
+Notes: Take advantage of clear weather for hiking to improve endurance and functional strength; yoga aids recovery and flexibility.
+
+# Sunday
+# Standup Paddleboarding & Bodyweight Conditioning
+Duration: 75 minutes
+Equipment:
+	* Standup paddleboard, paddle, life vest
+* Standup Paddleboarding (outdoor)
+	- [45 mins x 1 round]
+* Bodyweight Conditioning Circuit (3 rounds)
+	- Squat Jumps: [15 reps]
+	- Push-ups: [12 reps]
+	- Plank to Downward Dog: [10 reps]
+	- Mountain Climbers: [20 reps]
+		> Break: 60 seconds after each round
+* Cool down: Gentle stretching focusing on shoulders and core
+	- [10 mins x 1 round]
+Notes: Paddleboarding improves balance and core strength; bodyweight circuit boosts overall conditioning and energy.
+```
+SurveySummary.tsx:240 Parsed Weekly Plan: {Monday: {…}, Wednesday: {…}, Friday: {…}, Saturday: {…}, Sunday: {…}}
+SurveySummary.tsx:274 Response: ```markdown
+## Workout Plan
+# Monday
+# Kettlebell & Dumbbell Circuit
+Duration: 75 minutes
+* Warm-up: Dynamic stretches and light cardio
+	- [10 mins x 1 round]
+* Kettlebell Swings
+	- [15 reps x 4 sets]
+		> Break: 45 seconds after each set
+* Dumbbell Goblet Squats
+	- [12 reps x 4 sets]
+		> Break: 45 seconds after each set
+* Dumbbell Rows
+	- [12 reps x 4 sets]
+		> Break: 45 seconds after each set
+* Kettlebell Deadlifts
+	- [15 reps x 3 sets]
+		> Break: 45 seconds after each set
+* Core: Plank Hold
+	- [45 seconds x 3 sets]
+		> Break: 30 seconds after each set
+* Cool down: Yoga stretches focusing on flexibility and relaxation
+	- [10 mins x 1 round]
+Notes: Focus on controlled movements and proper form to build functional strength and avoid injury.
+
+# Wednesday
+# Trail Running & Bodyweight Strength
+Duration: 75 minutes
+* Trail Running (outdoor)
+	- [30 mins x 1 round]
+* Bodyweight Circuit (repeat 3 rounds)
+	- Push-ups: [12 reps]
+	- Walking Lunges: [15 reps each leg]
+	- Glute Bridges: [15 reps]
+	- Bodyweight Squats: [20 reps]
+		> Break: 60 seconds after each round
+* Core: Bicycle Crunches
+	- [20 reps x 3 sets]
+		> Break: 30 seconds after each set
+* Cool down: Gentle yoga stretches
+	- [10 mins x 1 round]
+Notes: Trail running will boost cardiovascular health and energy; bodyweight exercises enhance functional strength.
+
+# Friday
+# Weight Lifting & Functional Strength
+Duration: 90 minutes
+* Warm-up: Light cardio and mobility drills
+	- [10 mins x 1 round]
+* Deadlifts
+	- [8 reps x 4 sets]
+		> Break: 90 seconds after each set
+* Dumbbell Overhead Press
+	- [10 reps x 4 sets]
+		> Break: 60 seconds after each set
+* Weighted Step-ups (use dumbbells)
+	- [12 reps each leg x 3 sets]
+		> Break: 60 seconds after each set
+* Resistance Band Rows
+	- [15 reps x 3 sets]
+		> Break: 45 seconds after each set
+* Core: Russian Twists (with or without weight)
+	- [20 reps x 3 sets]
+		> Break: 30 seconds after each set
+* Cool down: Yoga stretches focusing on hips and shoulders
+	- [10 mins x 1 round]
+Notes: Emphasize proper lifting technique to build strength for daily activities.
+
+# Saturday
+# Outdoor Hiking & Mobility Yoga
+Duration: 90 minutes
+* Hiking (outdoor)
+	- [60 mins x 1 round]
+* Post-hike Yoga for Mobility and Recovery
+	- [30 mins x 1 round]
+Notes: Take advantage of clear weather for hiking to improve endurance and functional strength; yoga aids recovery and flexibility.
+
+# Sunday
+# Standup Paddleboarding & Bodyweight Conditioning
+Duration: 75 minutes
+Equipment:
+	* Standup paddleboard, paddle, life vest
+* Standup Paddleboarding (outdoor)
+	- [45 mins x 1 round]
+* Bodyweight Conditioning Circuit (3 rounds)
+	- Squat Jumps: [15 reps]
+	- Push-ups: [12 reps]
+	- Plank to Downward Dog: [10 reps]
+	- Mountain Climbers: [20 reps]
+		> Break: 60 seconds after each round
+* Cool down: Gentle stretching focusing on shoulders and core
+	- [10 mins x 1 round]
+Notes: Paddleboarding improves balance and core strength; bodyweight circuit boosts overall conditioning and energy.
+```
