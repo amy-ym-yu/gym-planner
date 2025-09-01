@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log("Geoapify response data:", data);
     res.json(data);
   } catch (error) {
     console.error("Geoapify error:", error);

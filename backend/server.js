@@ -1,5 +1,31 @@
 import dotenv from "dotenv";
-dotenv.config({ debug: true });
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log("Looking for .env at:", path.join(__dirname, '.env'));
+dotenv.config({ 
+  path: path.join(__dirname, '.env'),
+  debug: true 
+});
+dotenv.config({ 
+  path: path.join(__dirname, '.env'),
+  debug: true,
+  override: true  // This forces dotenv to override existing env vars
+});
+
+console.log("=== DOTENV DEBUG ===");
+console.log("Current working directory:", process.cwd());
+console.log("__filename would be:", import.meta.url);
+console.log("Total env vars loaded:", Object.keys(process.env).length);
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("PORT:", process.env.PORT);
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("MISTRAL_API_KEY exists:", !!process.env.MISTRAL_API_KEY);
+console.log("OPENAI_API_KEY exists:", !!process.env.OPENAI_API_KEY);
+console.log("===================");
 
 import express from "express";
 import cors from "cors";
