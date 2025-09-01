@@ -26,21 +26,40 @@ useEffect(() => {
     return;
   }
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch(
-        `/api/geoapify/autocomplete?text=${encodeURIComponent(surveyData.location)}`
-      );
+const fetchData = async () => {
+  try {
+    const url = `/api/geoapify/autocomplete?text=${encodeURIComponent(surveyData.location)}`;
+    console.log("Frontend making request to:", url);
+    
+    const res = await fetch(url);
+    
+    console.log("Frontend response status:", res.status);
+    console.log("Frontend response headers:", res.headers.get('content-type'));
+    console.log("Frontend response URL:", res.url);
 
-      if (!res.ok) throw new Error(`Status ${res.status}`);
-
-      const data = await res.json();
-      setSuggestions(data.features || []);
-    } catch (error) {
-      console.error("Error fetching location suggestions:", error);
-      setSuggestions([]);
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("Frontend error response:", errorText);
+      throw new Error(`Status ${res.status}: ${errorText}`);
     }
-  };
+
+    // Check content type before parsing JSON
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const textResponse = await res.text();
+      console.error("Expected JSON but got:", contentType);
+      console.error("Response body:", textResponse.substring(0, 500));
+      throw new Error('Expected JSON response');
+    }
+
+    const data = await res.json();
+    console.log("Frontend received data:", data);
+    setSuggestions(data.features || []);
+  } catch (error) {
+    console.error("Error fetching location suggestions:", error);
+    setSuggestions([]);
+  }
+};
 
   const timeout = setTimeout(fetchData, 300);
   return () => clearTimeout(timeout);
