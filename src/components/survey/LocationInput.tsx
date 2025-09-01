@@ -3,7 +3,6 @@ import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import type { SurveyData } from "../../pages/Survey"
 
-
 interface LocationInputProps {
   surveyData: SurveyData
   setSurveyData: React.Dispatch<React.SetStateAction<SurveyData>>
@@ -28,8 +27,10 @@ useEffect(() => {
 
 const fetchData = async () => {
   try {
-    const url = `/api/geoapify/autocomplete?text=${encodeURIComponent(surveyData.location)}`;
+    const params = `/api/geoapify/autocomplete?text=${encodeURIComponent(surveyData.location)}`;
+    const url = import.meta.env.VITE_BACKEND_URL + params;
     console.log("Frontend making request to:", url);
+    console.log(import.meta.env.VITE_BACKEND_URL);
     
     const res = await fetch(url);
     

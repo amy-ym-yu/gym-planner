@@ -42,7 +42,13 @@ const openai = new OpenAI({
 });
 
 
-app.use(cors({ origin: "http://localhost:5173" })); // adjust for prod
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://gym-planner-d100a.web.app",
+    "https://gym-planner-brg0.onrender.com",
+  ] 
+ })); // adjust for prod
 app.use(express.json({ limit: "200kb" }));
 
 app.post("/api/openai", async (req, res) => {

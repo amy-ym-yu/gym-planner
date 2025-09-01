@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "gym-planner-d100a",
     "public": "dist",
     "ignore": [
       "firebase.json",
@@ -8,12 +9,12 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/api/**",
+        "destination": "https://gym-planner-brg0.onrender.com"
       },
       {
-        "source": "/api/**",
-        "destination": "https://gym-planner-brg0.onrender.com/api/**"
+        "source": "**",
+        "destination": "/index.html"
       }
     ]
   },
