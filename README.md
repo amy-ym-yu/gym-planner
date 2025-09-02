@@ -9,5 +9,5 @@ The name is a word play on "Laissez Faire," which means "Let them do" in French.
 - Ability to rate exercises so plan adapts (WIP)
 - Email users their workout for the day & to rate their exercises (WIP)
 - Weekly reminders to generate new workout plan (WIP)
-- Ability to switch one workout to another day
+- Ability to switch one workout to another day (WIP)
 - Generate a completely new workout for given day (WIP)
