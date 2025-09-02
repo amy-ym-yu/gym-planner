@@ -1,8 +1,8 @@
 # LaissezFit
 The name is a word play on "Laissez Faire," which means "Let them do" in French. So, LaissezFit means "Let them fit."
 
-*Frontend*: React.js + Typescript + Vite
-*Backend*: Express.js + Google Firebase (WIP)
+- *Frontend*: React.js + Typescript + Vite
+- *Backend*: Express.js + Google Firebase (WIP)
 
 ## Features
 - Survey to generate workout plan
